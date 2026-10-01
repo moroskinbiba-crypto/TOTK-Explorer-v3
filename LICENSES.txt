@@ -1,0 +1,2 @@
+This project uses libtesla (GPL-2.0) and dmntcht (Atmosphère GPL-2.0 derived interface/library).
+See the upstream repositories used by tools/setup_deps.sh for complete license text.

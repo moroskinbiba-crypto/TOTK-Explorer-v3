@@ -1,0 +1,5 @@
+# type,name,x,y,z
+# This file is intentionally an external/user-editable database.
+# Add points as: Type,Name,X,Y,Z
+# Example:
+# Shrine,Example Shrine,0,0,0
