@@ -33,7 +33,7 @@ bool findHeap() {
 }
 
 void ensureDir() {
-    mkdir("sdmc:/switch", 0777); mkdir("sdmc:/switch/totk_explorer", 0777);
+    // Directories are created by the installation package.
 }
 
 bool readProfileFile(Profile& p) {
