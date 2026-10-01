@@ -1,10 +1,10 @@
 name: Build TOTK Explorer v3
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -21,20 +21,23 @@ jobs:
     steps:
       - name: Checkout project
         uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
-      - name: Install libtesla
+      - name: Download libtesla
         run: |
-          git clone --depth 1 https://github.com/WerWolv/libtesla.git /tmp/libtesla
-          cd /tmp/libtesla
-          make install
+          rm -rf libs/libtesla
+          mkdir -p libs
+          git clone --depth 1 https://github.com/WerWolv/libtesla.git libs/libtesla
+
+      - name: Verify libtesla
+        run: |
+          test -f libs/libtesla/include/tesla.hpp
+          echo "libtesla OK"
 
       - name: Build
         run: |
           make -j2
 
-      - name: Prepare artifact
+      - name: Prepare SD package
         run: |
           mkdir -p artifact/sd/switch/.overlays
           cp *.ovl artifact/sd/switch/.overlays/
@@ -43,6 +46,9 @@ jobs:
             mkdir -p artifact/sd/switch/totk_explorer
             cp data/points.csv artifact/sd/switch/totk_explorer/
           fi
+
+          echo "===== ARTIFACT ====="
+          find artifact -type f -print
 
       - name: Upload OVL
         uses: actions/upload-artifact@v4
