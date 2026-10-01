@@ -56,3 +56,4 @@ jobs:
           name: TOTK-Explorer-v3
           path: artifact/
           if-no-files-found: error
+          .
